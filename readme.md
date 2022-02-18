@@ -1,7 +1,19 @@
-# Scalafix rules for unused-string-interpolation
+# unused-string-interpolation
 
-To develop rule:
+This scalafix will remove the `s` interpolator if it is not provided any arguments (i.e. it is unused). The scala compiler will do this anyway -- this scalafix just makes it consistent. 
+
+For example, this:
+
 ```
-sbt ~tests/test
-# edit rules/src/main/scala/fix/Unusedstringinterpolation.scala
+object Example {
+  val foo = s"bar"
+}
+```
+
+will become this 
+
+```
+object Example {
+  val foo = "bar"
+}
 ```
