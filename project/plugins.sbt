@@ -1,3 +1,5 @@
 resolvers += Resolver.sonatypeRepo("releases")
-addSbtPlugin("ch.epfl.scala" % "sbt-scalafix" % "0.9.34")
-addSbtPlugin("com.eed3si9n" % "sbt-projectmatrix" % "0.8.0")
+
+addSbtPlugin("org.typelevel" % "sbt-typelevel" % "0.4.6")
+addSbtPlugin("ch.epfl.scala" % "sbt-scalafix"      % "0.9.34")
+addSbtPlugin("org.scalameta" % "sbt-scalafmt"      % "2.4.6")
