@@ -22,16 +22,19 @@ inThisBuild(
 
 publish / skip := true
 
-lazy val rules = project.settings(
-  moduleName := "unused-string-interpolation",
-  libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion,
-  scmInfo := Some(
-    ScmInfo(
-      url("https://github.com/areyouspiffy/unused-string-interpolation/"),
-      "scm:git:git@github.com:areyouspiffy/unused-string-interpolation.git"
+lazy val rules = project
+  .in(file("rules"))
+  .disablePlugins(TypelevelMimaPlugin)
+  .settings(
+    moduleName := "unused-string-interpolation",
+    libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion,
+    scmInfo := Some(
+      ScmInfo(
+        url("https://github.com/areyouspiffy/unused-string-interpolation/"),
+        "scm:git:git@github.com:areyouspiffy/unused-string-interpolation.git"
+      )
     )
   )
-)
 
 lazy val input = project.settings(publish / skip := true)
 
