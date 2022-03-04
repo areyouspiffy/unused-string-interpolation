@@ -8,6 +8,7 @@ inThisBuild(
     developers := List(tlGitHubDev("areyouspiffy", "Brian Owen")),
     homepage := Some(url("https://github.com/areyouspiffy/unused-string-interpolation")),
     licenses := Seq(License.Apache2),
+    tlSonatypeUseLegacyHost := false,
     scalaVersion := V.scala212,
     crossScalaVersions := List(V.scala211, V.scala212, V.scala213),
     addCompilerPlugin(scalafixSemanticdb),
