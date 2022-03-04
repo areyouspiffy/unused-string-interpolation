@@ -24,7 +24,7 @@ publish / skip := true
 
 lazy val rules = project
   .in(file("rules"))
-  .disablePlugins(TypelevelMimaPlugin)
+  .disablePlugins(MimaPlugin)
   .settings(
     moduleName := "unused-string-interpolation",
     libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion,
