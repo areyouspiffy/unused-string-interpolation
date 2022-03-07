@@ -7,7 +7,14 @@ inThisBuild(
     organization := "com.brianmowen",
     developers := List(tlGitHubDev("areyouspiffy", "Brian Owen")),
     homepage := Some(url("https://github.com/areyouspiffy/unused-string-interpolation")),
+    scmInfo := Some(
+      ScmInfo(
+        url("https://github.com/areyouspiffy/unused-string-interpolation/"),
+        "scm:git:git@github.com:areyouspiffy/unused-string-interpolation.git"
+      )
+    ),
     licenses := Seq(License.Apache2),
+    tlSonatypeUseLegacyHost := false,
     scalaVersion := V.scala212,
     crossScalaVersions := List(V.scala211, V.scala212, V.scala213),
     addCompilerPlugin(scalafixSemanticdb),
@@ -19,22 +26,31 @@ inThisBuild(
   )
 )
 
-publish / skip := true
+lazy val commonSettings =
+  Seq(mimaReportBinaryIssues := {})
 
-lazy val rules = project.settings(
-  moduleName := "unused-string-interpolation",
-  libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion,
-  scmInfo := Some(
-    ScmInfo(
-      url("https://github.com/areyouspiffy/unused-string-interpolation/"),
-      "scm:git:git@github.com:areyouspiffy/unused-string-interpolation.git"
-    )
+lazy val root = project
+  .in(file("."))
+  .settings(publish / skip := true)
+  .settings(commonSettings)
+  .aggregate(rules, input, output, tests)
+
+lazy val rules = project
+  .in(file("rules"))
+  .settings(
+    mimaReportBinaryIssues := {},
+    moduleName := "unused-string-interpolation",
+    libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion
   )
-)
+  .settings(commonSettings)
 
-lazy val input = project.settings(publish / skip := true)
+lazy val input = project
+  .settings(publish / skip := true)
+  .settings(commonSettings)
 
-lazy val output = project.settings(publish / skip := true)
+lazy val output = project
+  .settings(publish / skip := true)
+  .settings(commonSettings)
 
 lazy val tests = project
   .settings(
@@ -47,3 +63,4 @@ lazy val tests = project
   )
   .dependsOn(rules)
   .enablePlugins(ScalafixTestkitPlugin)
+  .settings(commonSettings)
