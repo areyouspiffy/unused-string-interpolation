@@ -31,6 +31,7 @@ lazy val root = project
 lazy val rules = project
   .in(file("rules"))
   .settings(
+    mimaReportBinaryIssues := {},
     moduleName := "unused-string-interpolation",
     libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion,
     scmInfo := Some(
@@ -40,7 +41,6 @@ lazy val rules = project
       )
     )
   )
-  .disablePlugins(MimaPlugin)
 
 lazy val input = project
   .settings(publish / skip := true)
