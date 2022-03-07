@@ -7,6 +7,12 @@ inThisBuild(
     organization := "com.brianmowen",
     developers := List(tlGitHubDev("areyouspiffy", "Brian Owen")),
     homepage := Some(url("https://github.com/areyouspiffy/unused-string-interpolation")),
+    scmInfo := Some(
+      ScmInfo(
+        url("https://github.com/areyouspiffy/unused-string-interpolation/"),
+        "scm:git:git@github.com:areyouspiffy/unused-string-interpolation.git"
+      )
+    ),
     licenses := Seq(License.Apache2),
     tlSonatypeUseLegacyHost := false,
     scalaVersion := V.scala212,
@@ -33,13 +39,7 @@ lazy val rules = project
   .settings(
     mimaReportBinaryIssues := {},
     moduleName := "unused-string-interpolation",
-    libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion,
-    scmInfo := Some(
-      ScmInfo(
-        url("https://github.com/areyouspiffy/unused-string-interpolation/"),
-        "scm:git:git@github.com:areyouspiffy/unused-string-interpolation.git"
-      )
-    )
+    libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion
   )
 
 lazy val input = project
