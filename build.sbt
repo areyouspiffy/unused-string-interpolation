@@ -20,11 +20,16 @@ inThisBuild(
   )
 )
 
-publish / skip := true
+lazy val root = project
+  .in(file("."))
+  .disablePlugins(MimaPlugin)
+  .settings(
+    publish / skip := true
+  )
+  .aggregate(rules, input, output, tests)
 
 lazy val rules = project
   .in(file("rules"))
-  .disablePlugins(MimaPlugin)
   .settings(
     moduleName := "unused-string-interpolation",
     libraryDependencies += "ch.epfl.scala" %% "scalafix-core" % V.scalafixVersion,
@@ -35,10 +40,15 @@ lazy val rules = project
       )
     )
   )
+  .disablePlugins(MimaPlugin)
 
-lazy val input = project.settings(publish / skip := true)
+lazy val input = project
+  .settings(publish / skip := true)
+  .disablePlugins(MimaPlugin)
 
-lazy val output = project.settings(publish / skip := true)
+lazy val output = project
+  .settings(publish / skip := true)
+  .disablePlugins(MimaPlugin)
 
 lazy val tests = project
   .settings(
@@ -51,3 +61,4 @@ lazy val tests = project
   )
   .dependsOn(rules)
   .enablePlugins(ScalafixTestkitPlugin)
+  .disablePlugins(MimaPlugin)
